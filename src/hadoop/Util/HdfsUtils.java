@@ -9,14 +9,19 @@ import org.apache.hadoop.fs.Path;
 
 public class HdfsUtils {
 
-	public static String uri = "hdfs://192.168.153.20:8020";
-
+	/* 家里 */
+//	public static String uri = "hdfs://192.168.153.20:8020";
+//	public static String sysName = "lock";
+	/* 单位 */
+	public static String uri = "hdfs://192.168.0.23:8020";
+	public static String sysName = "root";
+	
 	public static boolean mkdir(String dir) throws IOException {
 		if (StringUtils.isEmpty(dir)) {
 			return false;
 		}
 
-		System.setProperty("HADOOP_USER_NAME", "lock");
+		System.setProperty("HADOOP_USER_NAME", sysName);
 		dir = uri + dir;
 		Configuration conf = new Configuration();
 		FileSystem fs = FileSystem.get(URI.create(dir), conf);
@@ -35,7 +40,7 @@ public class HdfsUtils {
 			return false;
 		}
 
-		System.setProperty("HADOOP_USER_NAME", "lock");
+		System.setProperty("HADOOP_USER_NAME", sysName);
 		fileName = uri + fileName;
 		Configuration conf = new Configuration();
 		FileSystem fs = FileSystem.get(URI.create(fileName), conf);
