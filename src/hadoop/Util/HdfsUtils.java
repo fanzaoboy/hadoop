@@ -21,7 +21,7 @@ public class HdfsUtils {
 	 * 
 	 * @param dir 要创建的路径
 	 * 
-	 * @return true/false
+	 * @return boolean
 	 */
 	public static boolean mkdir(String dir) throws IOException {
 		if (StringUtils.isEmpty(dir)) {
@@ -42,6 +42,11 @@ public class HdfsUtils {
 		}
 	}
 
+	/**
+	 * 判断文件是否存在
+	 * @param fileName 文件名
+	 * @return boolean
+	 */
 	public static boolean isExitsFile(String fileName) throws IOException {
 		if (StringUtils.isEmpty(fileName)) {
 			return false;
