@@ -9,13 +9,20 @@ import org.apache.hadoop.fs.Path;
 
 public class HdfsUtils {
 
-	/* 家里 */
+	/* Home */
 //	public static String uri = "hdfs://192.168.153.20:8020";
 //	public static String sysName = "lock";
-	/* 单位 */
+	/* Company */
 	public static String uri = "hdfs://192.168.0.23:8020";
 	public static String sysName = "root";
 	
+	/**
+	 * 创建文件夹，并返回True/False
+	 * 
+	 * @param dir 要创建的路径
+	 * 
+	 * @return true/false
+	 */
 	public static boolean mkdir(String dir) throws IOException {
 		if (StringUtils.isEmpty(dir)) {
 			return false;
@@ -30,7 +37,7 @@ public class HdfsUtils {
 			fs.mkdirs(new Path(dir));
 			return true;
 		} else {
-			System.err.println("路径已存在");
+			System.err.println("Error : Path already exists!");
 			return false;
 		}
 	}

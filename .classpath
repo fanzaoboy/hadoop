@@ -95,5 +95,6 @@
 	<classpathentry kind="lib" path="lib/hadoop/xwork-core-2.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/hadoop/xz-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/hadoop/zookeeper-3.4.6.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
