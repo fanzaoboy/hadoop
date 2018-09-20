@@ -70,7 +70,7 @@ public class HdfsUtils {
 	 * @throws IOException 
 	 *
 	 */
-	public static boolean deleteDir(String dir,boolean recursive) throws IOException {
+	public static boolean deleteDir(String dir) throws IOException {
 		if (StringUtils.isEmpty(dir)) {
 			return false;
 		}
@@ -80,10 +80,10 @@ public class HdfsUtils {
 		Configuration conf = new Configuration();
 		FileSystem fs = FileSystem.get(URI.create(dir), conf);
 		if (fs.exists(new Path(dir))) {
-			fs.delete(new Path(dir),recursive);
+			fs.delete(new Path(dir),true);
 			return true;
 		} else {
-			System.err.println("Error:" + dir + "Path not exists!");
+			System.err.println("Error:[" + dir + "] Path not exists!");
 			return false;
 		}
 	}
