@@ -15,9 +15,10 @@ public class HdfsUtils {
 	/* Company */
 	public static String uri = "hdfs://192.168.0.23:8020";
 	public static String sysName = "root";
-	
+
 	/**
 	 * 创建文件夹，并返回True/False
+	 * 
 	 * @param dir 要创建的路径
 	 * @return boolean
 	 */
@@ -35,13 +36,14 @@ public class HdfsUtils {
 			fs.mkdirs(new Path(dir));
 			return true;
 		} else {
-			System.err.println("Error:"+dir+"Path already exists!");
+			System.err.println("Error:" + dir + "Path already exists!");
 			return false;
 		}
 	}
 
 	/**
 	 * 判断文件是否存在
+	 * 
 	 * @param fileName 文件名
 	 * @return boolean
 	 */
@@ -61,5 +63,28 @@ public class HdfsUtils {
 			return false;
 		}
 
+	}
+
+	/**
+	 * 删除HDFS目录
+	 * @throws IOException 
+	 *
+	 */
+	public static boolean deleteDir(String dir,boolean recursive) throws IOException {
+		if (StringUtils.isEmpty(dir)) {
+			return false;
+		}
+		
+		System.setProperty("HADOOP_USER_NAME", sysName);
+		dir = uri + dir;
+		Configuration conf = new Configuration();
+		FileSystem fs = FileSystem.get(URI.create(dir), conf);
+		if (fs.exists(new Path(dir))) {
+			fs.delete(new Path(dir),recursive);
+			return true;
+		} else {
+			System.err.println("Error:" + dir + "Path not exists!");
+			return false;
+		}
 	}
 }
