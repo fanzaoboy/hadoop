@@ -18,9 +18,7 @@ public class HdfsUtils {
 	
 	/**
 	 * 创建文件夹，并返回True/False
-	 * 
 	 * @param dir 要创建的路径
-	 * 
 	 * @return boolean
 	 */
 	public static boolean mkdir(String dir) throws IOException {
@@ -37,7 +35,7 @@ public class HdfsUtils {
 			fs.mkdirs(new Path(dir));
 			return true;
 		} else {
-			System.err.println("Error : Path already exists!");
+			System.err.println("Error:"+dir+"Path already exists!");
 			return false;
 		}
 	}
