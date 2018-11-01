@@ -2,8 +2,10 @@ package hadoop.Util;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
@@ -17,9 +19,9 @@ public class HdfsUtils {
 	public static String sysName = "root";
 
 	/**
-	 * ´´½¨ÎÄ¼þ¼Ð£¬²¢·µ»ØTrue/False
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½True/False
 	 * 
-	 * @param dir Òª´´½¨µÄÂ·¾¶
+	 * @param dir Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
 	 * @return boolean
 	 */
 	public static boolean mkdir(String dir) throws IOException {
@@ -42,9 +44,9 @@ public class HdfsUtils {
 	}
 
 	/**
-	 * ÅÐ¶ÏÎÄ¼þÊÇ·ñ´æÔÚ
+	 * ï¿½Ð¶ï¿½ï¿½Ä¼ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	 * 
-	 * @param fileName ÎÄ¼þÃû
+	 * @param fileName ï¿½Ä¼ï¿½ï¿½ï¿½
 	 * @return boolean
 	 */
 	public static boolean isExitsFile(String fileName) throws IOException {
@@ -66,7 +68,7 @@ public class HdfsUtils {
 	}
 
 	/**
-	 * É¾³ýHDFSÄ¿Â¼
+	 * É¾ï¿½ï¿½HDFSÄ¿Â¼
 	 * @throws IOException 
 	 *
 	 */
@@ -86,5 +88,27 @@ public class HdfsUtils {
 			System.err.println("Error:[" + dir + "] Path not exists!");
 			return false;
 		}
+	}
+	
+	public static String[] showDir(String inPath) {
+		String strs[] = new String[100];
+		System.setProperty("HADOOP_USER_NAME", sysName);
+		Configuration conf = new Configuration();
+		try {
+			FileSystem fs = FileSystem.get(new URI(uri), conf);
+			Path path = new Path(uri);
+			FileStatus status[] = fs.listStatus(path);
+			for(int i = 0; i < status.length; i++) {
+				System.out.println(status[i].getPath().toString());
+				strs[i] = status[i].getPath().toString();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return strs;
 	}
 }

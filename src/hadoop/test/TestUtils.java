@@ -7,7 +7,11 @@ import hadoop.Util.HdfsUtils;
 public class TestUtils {
 
 	public static void main(String[] args) throws IOException {
-//		System.out.println(HdfsUtils.mkdir("/wc/wcc/wccc"));
-		System.out.println(HdfsUtils.deleteDir("/wc"));
+//		System.out.println(HdfsUtils.mkdir("/wc"));
+//		System.out.println(HdfsUtils.deleteDir("/wc"));
+		String[] strs = HdfsUtils.showDir("/flume/");
+		for(String str : strs) {
+			System.out.println(str);
+		}
 	}
 }
