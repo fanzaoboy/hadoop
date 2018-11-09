@@ -1,17 +1,13 @@
 package hadoop.test;
 
-import java.io.IOException;
-
-import hadoop.Util.HdfsUtils;
+import hadoop.Util.*;
 
 public class TestUtils {
 
-	public static void main(String[] args) throws IOException {
-//		System.out.println(HdfsUtils.mkdir("/wc"));
-//		System.out.println(HdfsUtils.deleteDir("/wc"));
-		String[] strs = HdfsUtils.showDir("/flume/");
-		for(String str : strs) {
-			System.out.println(str);
-		}
+	public static void main(String[] args) {
+		String date1 = "30/May/2013:17:38:20";
+		System.out.println(DateUtils.formatDateEN(date1));
+		
+		
 	}
 }

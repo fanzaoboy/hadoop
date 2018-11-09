@@ -1,22 +1,23 @@
 package hadoop.Util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateUtils {
 
 	public static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat EN_DATE_FORMAT = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss", Locale.ENGLISH);
 
 	/**
-	 * ÅĞ¶ÏÒ»¸öÊ±¼äÊÇ·ñÔÚÁíÒ»¸öÊ±¼äÖ®Ç° yyyy-MM-dd HH:mm:ss
+	 * ï¿½Ğ¶ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½Ö®Ç° yyyy-MM-dd HH:mm:ss
 	 * 
-	 * @param time1
-	 *            µÚÒ»¸öÊ±¼ä
-	 * @param time2
-	 *            µÚ¶ş¸öÊ±¼ä
-	 * @return ÅĞ¶Ï½á¹û
+	 * @param time1 ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½
+	 * @param time2 ï¿½Ú¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	 * @return ï¿½Ğ¶Ï½ï¿½ï¿½
 	 */
 	public static boolean before(String time1, String time2) {
 		try {
@@ -27,19 +28,17 @@ public class DateUtils {
 				return true;
 			}
 		} catch (Exception e) {
-			System.err.println("Error:ÊäÈëµÄtimeÀàĞÍ²»ÕıÈ·!");
+			System.err.println("Error:ï¿½ï¿½ï¿½ï¿½ï¿½timeï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½È·!");
 		}
 		return false;
 	}
 
 	/**
-	 * ÅĞ¶ÏÒ»¸öÊ±¼äÊÇ·ñÔÚÁíÒ»¸öÊ±¼äÖ®ºó
+	 * ï¿½Ğ¶ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½Ö®ï¿½ï¿½
 	 * 
-	 * @param time1
-	 *            µÚÒ»¸öÊ±¼ä
-	 * @param time2
-	 *            µÚ¶ş¸öÊ±¼ä
-	 * @return ÅĞ¶Ï½á¹û
+	 * @param time1 ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½
+	 * @param time2 ï¿½Ú¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	 * @return ï¿½Ğ¶Ï½ï¿½ï¿½
 	 */
 	public static boolean after(String time1, String time2) {
 		try {
@@ -56,13 +55,11 @@ public class DateUtils {
 	}
 
 	/**
-	 * ¼ÆËãÊ±¼ä²îÖµ£¨µ¥Î»ÎªÃë£©
+	 * ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Î»Îªï¿½ë£©
 	 * 
-	 * @param time1
-	 *            Ê±¼ä1
-	 * @param time2
-	 *            Ê±¼ä2
-	 * @return ²îÖµ
+	 * @param time1 Ê±ï¿½ï¿½1
+	 * @param time2 Ê±ï¿½ï¿½2
+	 * @return ï¿½ï¿½Öµ
 	 */
 	public static int minus(String time1, String time2) {
 		try {
@@ -79,11 +76,10 @@ public class DateUtils {
 	}
 
 	/**
-	 * »ñÈ¡ÄêÔÂÈÕºÍĞ¡Ê±
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Õºï¿½Ğ¡Ê±
 	 * 
-	 * @param datetime
-	 *            Ê±¼ä£¨yyyy-MM-dd HH:mm:ss£©
-	 * @return ½á¹û
+	 * @param datetime Ê±ï¿½ä£¨yyyy-MM-dd HH:mm:ssï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½
 	 */
 	public static String getDateHour(String datetime) {
 		String date = datetime.split(" ")[0];
@@ -93,18 +89,18 @@ public class DateUtils {
 	}
 
 	/**
-	 * »ñÈ¡µ±ÌìÈÕÆÚ£¨yyyy-MM-dd£©
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½yyyy-MM-ddï¿½ï¿½
 	 * 
-	 * @return µ±ÌìÈÕÆÚ
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static String getTodayDate() {
 		return DATE_FORMAT.format(new Date());
 	}
 
 	/**
-	 * »ñÈ¡×òÌìµÄÈÕÆÚ£¨yyyy-MM-dd£©
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½yyyy-MM-ddï¿½ï¿½
 	 * 
-	 * @return ×òÌìµÄÈÕÆÚ
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static String getYesterdayDate() {
 		Calendar cal = Calendar.getInstance();
@@ -117,22 +113,38 @@ public class DateUtils {
 	}
 
 	/**
-	 * ¸ñÊ½»¯ÈÕÆÚ£¨yyyy-MM-dd£©
+	 * ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½yyyy-MM-ddï¿½ï¿½
 	 * 
-	 * @param date
-	 *            Date¶ÔÏó
-	 * @return ¸ñÊ½»¯ºóµÄÈÕÆÚ
+	 * @param date Dateï¿½ï¿½ï¿½ï¿½
+	 * @return ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static String formatDate(Date date) {
 		return DATE_FORMAT.format(date);
 	}
 
 	/**
-	 * ¸ñÊ½»¯Ê±¼ä£¨yyyy-MM-dd HH:mm:ss£©
 	 * 
-	 * @param date
-	 *            Date¶ÔÏó
-	 * @return ¸ñÊ½»¯ºóµÄÊ±¼ä
+	 * @author foton
+	 * @desc æ ¼å¼åŒ–è‹±æ–‡æ—¶é—´
+	 * 
+	 */
+	public static String formatDateEN(String date) {
+		Date parse = null;
+		String fin_date = null;
+		try {
+			parse = EN_DATE_FORMAT.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		fin_date = formatTime(parse);
+		return fin_date;
+	}
+
+	/**
+	 * ï¿½ï¿½Ê½ï¿½ï¿½Ê±ï¿½ä£¨yyyy-MM-dd HH:mm:ssï¿½ï¿½
+	 * 
+	 * @param date Dateï¿½ï¿½ï¿½ï¿½
+	 * @return ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 	 */
 	public static String formatTime(Date date) {
 		return TIME_FORMAT.format(date);
