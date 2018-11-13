@@ -2,16 +2,14 @@ package hadoop.Util;
 
 public class CutStringUtils {
 
-	
-	
-	public static void main(String[] args) {
-		String line = "110.52.250.126 - - [30/May/2013:17:38:20 +0800] \"GET /data/cache/style_1_widthauto.css?y7a HTTP/1.1\" 200 1292";
-		String[] strs = parse(line);
-		for (String str : strs) {
-			System.out.println(str);
-		}
-	}
-	
+//	public static void main(String[] args) {
+//		String line = "110.52.250.126 - - [30/May/2013:17:38:20 +0800] \"GET /data/cache/style_1_widthauto.css?y7a HTTP/1.1\" 200 1292";
+//		String[] strs = parse(line);
+//		for (String str : strs) {
+//			System.out.println(str);
+//		}
+//	}
+//	
 	public static String[] parse (String line) {
 		String IP = parseIP(line);
 		String time = parseTime(line);
