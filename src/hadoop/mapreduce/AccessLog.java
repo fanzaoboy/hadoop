@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -18,28 +18,28 @@ import hadoop.Util.HdfsUtils;
 
 public class AccessLog {
 
-	public static class AccessLogMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+	public static class AccessLogMapper extends Mapper<LongWritable, Text, LongWritable, Text> {
 		@Override
-		protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context)
+		protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, LongWritable, Text>.Context context)
 				throws IOException, InterruptedException {
 			String line = value.toString();
 			String IP = CutStringUtils.parse(line)[0];
 			String time = CutStringUtils.parse(line)[1];
-			context.write(new Text(IP + "," + time), new IntWritable(1));
+			String url = CutStringUtils.parse(line)[2];
+			String status = CutStringUtils.parse(line)[3];
+			String traffic = CutStringUtils.parse(line)[4];
+			context.write(key,new Text(IP + "\t" + time + "\t" + url + "\t" + status + "\t" + traffic));
 
 		}
 
 	}
 
-	public static class AccessLogReduce extends Reducer<Text, IntWritable, Text, IntWritable> {
+	public static class AccessLogReduce extends Reducer<LongWritable, Text, Text, NullWritable> {
 		@Override
-		protected void reduce(Text key, Iterable<IntWritable> value, Context context)
-				throws IOException, InterruptedException {
-			int count = 0;
-			for (IntWritable v : value) {
-				count += v.get();
+		protected void reduce(LongWritable key, Iterable<Text> values,Context context) throws IOException, InterruptedException {
+			for (Text value : values) {
+				context.write(new Text(value), NullWritable.get());
 			}
-			context.write(key, new IntWritable(count));
 		}
 	}
 
@@ -59,10 +59,10 @@ public class AccessLog {
 		job.setJarByClass(AccessLog.class);
 		job.setMapperClass(AccessLogMapper.class);
 		job.setReducerClass(AccessLogReduce.class);
-		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(IntWritable.class);
+		job.setMapOutputKeyClass(LongWritable.class);
+		job.setMapOutputValueClass(Text.class);
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+		job.setOutputValueClass(NullWritable.class);
 
 		FileInputFormat.setInputPaths(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));

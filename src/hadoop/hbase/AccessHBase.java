@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
-import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.MasterNotRunningException;
 import org.apache.hadoop.hbase.ZooKeeperConnectionException;
 import org.apache.hadoop.hbase.client.Get;
@@ -17,11 +16,14 @@ public class AccessHBase {
 	
 	private static String tableName = "AccessLog";
 	private static String rowkey = "27.19.74.143";
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws MasterNotRunningException, ZooKeeperConnectionException, IOException {
 		Configuration conf = HBaseConfiguration.create();
 		conf.set("hbase.zookeeper.quorum", "192.168.0.23:2181");
 		
+		@SuppressWarnings({ "unused", "deprecation" })
 		HBaseAdmin ha = new HBaseAdmin(conf);
+		@SuppressWarnings("deprecation")
 		HTable ht = new HTable(conf, tableName);
 		Get get = new Get(Bytes.toBytes(rowkey));
 		get.addFamily(Bytes.toBytes("IP"));
